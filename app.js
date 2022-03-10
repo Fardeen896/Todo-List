@@ -46,13 +46,13 @@ function addTodo(event) {
     //Create check button
     const checkBtn = document.createElement("button");
     checkBtn.className = "btn btn-secondary";
-    checkBtn.classList.add('btn-secondary');
-    checkBtn.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
+    checkBtn.classList.add("btn-secondary");
+    checkBtn.innerHTML = "";
     newTodo.appendChild(checkBtn);
     //Create delete button
     const deleteBtn = document.createElement("button");
     deleteBtn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
-    deleteBtn.classList.add('deleteBtn');
+    deleteBtn.classList.add("deleteBtn");
     deleteBtn.innerHTML = '<i class="fa fa-trash" aria-hidden="true"></i>';
     newTodo.appendChild(deleteBtn);
     //Adding the todo to the list
@@ -65,28 +65,30 @@ function checkTodo(event) {
     const elem = event.target;
     //If checked
     if (elem.classList[1] === "btn-secondary" && elem.innerHTML != "") {
+        //Get the description button, add a strikethrough.
         var todoDesc = elem.parentNode.children[1];
         var str = todoDesc.textContent;
-        todoDesc.style.textDecoration = "line-through";
-        todoDesc.style.opacity = 0.5;
+        todoDesc.style.textDecoration = "none";
+        todoDesc.style.opacity = 1.0;
         elem.innerHTML = "";
+        //Play the check notification sound
         checkSound.play();
     } else if (elem.className == "fa fa-check") {
         var todoDesc = elem.parentNode.parentNode.children[1];
         var str = todoDesc.textContent;
-        todoDesc.style.textDecoration = "line-through";
-        todoDesc.style.opacity = 0.5;
+        todoDesc.style.textDecoration = "none";
+        todoDesc.style.opacity = 1.0;
         elem.parentNode.innerHTML = "";
         checkSound.play();
     } else if (elem.classList[1] === "btn-secondary" && elem.innerHTML == "") {
         //If not checked
         var todoDesc = elem.parentNode.children[1];
         var str = todoDesc.textContent;
-        todoDesc.style.textDecoration = "none";
-        todoDesc.style.opacity = 1.0;
+        todoDesc.style.textDecoration = "line-through";
+        todoDesc.style.opacity = 0.5;
         elem.innerHTML = '<i class="fa fa-check" aria-hidden="true"></i>';
         checkSound.play();
-    }
+    } 
 }
 
 function deleteTodo(event) {
